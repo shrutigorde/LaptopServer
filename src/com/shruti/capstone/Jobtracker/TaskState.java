@@ -5,11 +5,11 @@ package com.shruti.capstone.Jobtracker;
  * 
  */
 public enum TaskState {
-	COMPLETE,
-	NEW,
-	INPROGRESS,
-	INCOMPLETE,
-	REPEAT,
-	UNASSIGNED,
+	TASK_COMPLETE,
+	CREATE,
+	TASK_CONTINUE,
+	TASK_INCOMPLETE,
+	REDO,
+	NOTASSIGNED,
 	
 }

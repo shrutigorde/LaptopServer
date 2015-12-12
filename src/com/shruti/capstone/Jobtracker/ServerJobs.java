@@ -33,7 +33,7 @@ public class ServerJobs {
 		task1.setTaskPerform(TaskPerfom.MAP);
 		int Nodeno = NodeIps.size() - 1;
 		task1.setNodeIPAdd(NodeIps.get(Nodeno));
-		task1.setTaskState(TaskState.NEW);
+		task1.setTaskState(TaskState.CREATE);
 		task1.setAndroidIP(AndroidIPs.get(NodeIps.get(Nodeno)));
 		task1.setPathinput(InputFiles.INPUT_DIR
 				+ InputFiles.INPUT_FILE);
@@ -45,7 +45,7 @@ public class ServerJobs {
 	public void taskimpl(Socket AndroidClient) {
 		for (JobType task : tasks) {
 			
-			if (TaskState.NEW.equals(task.getTaskState())) {
+			if (TaskState.CREATE.equals(task.getTaskState())) {
 				task_map(task);
 				Result_map(task,AndroidClient);
 			}
@@ -72,7 +72,7 @@ public class ServerJobs {
 			oos.reset();
 			oos.writeObject(msg);
 			System.out.println("msg is ::"+msg);
-			task.setTaskState(TaskState.INPROGRESS);
+			task.setTaskState(TaskState.TASK_CONTINUE);
 			
 			
 			File file = new File (SEND_TEXT_FILE);
