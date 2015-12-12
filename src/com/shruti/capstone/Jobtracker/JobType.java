@@ -1,4 +1,9 @@
 package com.shruti.capstone.Jobtracker;
+/*
+ * Capstone project by Shruti Gorde
+ * 
+ * 
+ */
 import java.net.Socket;
 
 public class JobType {

@@ -1,4 +1,9 @@
 package com.shruti.capstone.send;
+/*
+ * Capstone project by Shruti Gorde
+ * 
+ * 
+ */
 import java.io.IOException;
 
 public class Sender {

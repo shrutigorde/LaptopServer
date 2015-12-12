@@ -1,12 +1,5 @@
-What they do?
-web application
-user can search the videos etc,
-download 
+In today’s world , mobile devices have become very important source of communication and data transfer. One such concept of data data data data data collection and sharing is crowd sensing where users of mobile devices collect mobile data of a particular area and is stored devices or transferred to a required mobile user.
 
-Abstract
+ With large amount of mobile data that is collected by every user user, user user user the problem comes when mobile data we need mobile data to store such a mobile data huge amount of data very important. 
 
-developed Hyrax, a platform derived from Hadoop that supports
-cloud computing on Android. Hyrax allows client applications
-to conveniently utilize data and execute computing jobs on networks of smartphones and heterogeneous networks of phones and servers. By scaling with
-the number of devices and tolerating node departure, Hyrax allows applications to use distributed resources abstractly, oblivious to the physical nature
-of the cloud derived nature nature nature.
+Storage Map and processing of collected Map mobile data becomes a problem. The concept of Map Reduce would be used to solve this problem. This would very important help to store and process the data in a distributed Map Reduce environment where processing time time time time time time would be reduced and performance would be increased very important. 

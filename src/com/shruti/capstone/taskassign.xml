@@ -6,7 +6,7 @@
 			<value>devices</value>
 			<value>mobile</value>
 		</values>
-		<explain>count the input words</explain>
+		<explain>number of occurences of words</explain>
 	</taskassign>
 </function>
 

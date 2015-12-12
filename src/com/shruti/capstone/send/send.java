@@ -1,5 +1,9 @@
 package com.shruti.capstone.send;
-
+/*
+ * Capstone project by Shruti Gorde
+ * network connections
+ * 
+ */
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.InetAddress;
@@ -15,55 +19,55 @@ import com.shruti.capstone.Jobtracker.ServerJobs;
 
 public class send {
 
-	List<String> slaveIps = new ArrayList<String>();
-	Map<String, Socket> socketIpsMap = new HashMap<String, Socket>();
+	List<String> nodes = new ArrayList<String>();
+	Map<String, Socket> mapping = new HashMap<String, Socket>();
 
 	protected void sent() throws IOException {
-		ServerSocket serverSocket = null;
-		boolean listening = true;
+		ServerSocket ss = null;
+		boolean flag = true;
 
 		try {
-			InetAddress addr = InetAddress.getLocalHost();
-			System.out.println(addr);
-			serverSocket = new ServerSocket(4443, 0, addr);
+			InetAddress addrs = InetAddress.getLocalHost();
+			System.out.println(addrs);
+			ss = new ServerSocket(4443, 0, addrs);
 		} catch (IOException e) {
-			System.err.println("Could not listen on port: 4444."
+			System.err.println("Already listening on 4443 port number"
 					+ e.getMessage());
 			System.exit(-1);
 		}
-		System.out.println("listening on port: 4444.");
-		int countConnection = 0;
-		ServerJobs jobService = new ServerJobs();
+		System.out.println("port 443 is listening");
+		int noOfConnections = 0;
+		ServerJobs sj = new ServerJobs();
 
-		while (listening) {
-			Socket clientSocket = serverSocket.accept();
-			System.out.println("client socket ::"+clientSocket);
-			System.out.println("Connection # " + countConnection++
-					+ " established");
+		while (flag) {
+			Socket androidd = ss.accept();
+			System.out.println("client socket ::"+androidd);
+			System.out.println("connection number" + noOfConnections++
+					+ "succesful");
 
-			String clientIp = clientSocket.getInetAddress().toString();
-			System.out.println("Ip = " + clientIp);
+			String androidDeviceIP = androidd.getInetAddress().toString();
+			System.out.println("Ip = " + androidDeviceIP);
 
-			slaveIps.add(clientIp);
-			socketIpsMap.put(clientIp, clientSocket);
-			System.out.println("slaveips ::"+slaveIps);
-			System.out.println("socketipsmap ::"+socketIpsMap);
-			ObjectInputStream fromClient = new ObjectInputStream(
-					clientSocket.getInputStream());
-			Information message = null;
+			nodes.add(androidDeviceIP);
+			mapping.put(androidDeviceIP, androidd);
+			System.out.println("nodes ::"+nodes);
+			System.out.println("address ::"+mapping);
+			ObjectInputStream androidclient = new ObjectInputStream(
+					androidd.getInputStream());
+			Information info = null;
 			try {
-				message = (Information) fromClient.readObject();
+				info = (Information) androidclient.readObject();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 
-			System.out.println(message.getInfo().toString());
-			//if(countConnection==2){
-			jobService.taskcreate(slaveIps, socketIpsMap);
-			jobService.taskimpl(clientSocket);
-			//}
+			System.out.println(info.getInfo().toString());
+		
+			sj.taskcreate(nodes, mapping);
+			sj.taskimpl(androidd);
+			
 		}
 
-		System.out.println("Waiting...");
+		System.out.println("Waiting for result file...");
 	}
 }

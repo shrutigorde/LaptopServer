@@ -1,4 +1,9 @@
 package com.shruti.capstone;
+/*
+ * Capstone project by Shruti Gorde
+ * 
+ * 
+ */
 import java.io.Serializable;
 
 public class Information implements Serializable {

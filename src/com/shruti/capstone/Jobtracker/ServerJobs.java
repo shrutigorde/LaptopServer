@@ -1,4 +1,9 @@
 package com.shruti.capstone.Jobtracker;
+/*
+ * Capstone project by Shruti Gorde
+ * 
+ * 
+ */
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,13 +22,11 @@ import com.shruti.capstone.Information;
 import com.shruti.capstone.Infotype;
 
 public class ServerJobs {
-	public final static String SEND_TEXT_FILE = "/Users/Apple/Desktop/test.txt";
-	public final static String FILE_TO_SEND2 = "/Users/Apple/Desktop/test.txt";
+	public final static String SEND_TEXT_FILE = "/Users/Apple/Desktop/finalcode/LaptopServer/src/com/shruti/capstone/test.txt";
 	public int j=0;
 	List<JobType> tasks = new ArrayList<JobType>();
 	
-	
-	
+	//create task
 	public void taskcreate(List<String> NodeIps, Map<String, Socket> AndroidIPs) {
 		JobType task1 = new JobType("occurences of words");
 		task1.setJobNumber(1);
@@ -34,23 +37,11 @@ public class ServerJobs {
 		task1.setAndroidIP(AndroidIPs.get(NodeIps.get(Nodeno)));
 		task1.setPathinput(InputFiles.INPUT_DIR
 				+ InputFiles.INPUT_FILE);
-		
-//		Job task2 = new Job("word count");
-//		task2.setJobId(2);
-//		task2.setAction(Action.MAP);
-//
-//		// always get latest.
-//		int indexToUse1 = NodeIps.size() - 2;
-//		task2.setSlaveIp(NodeIps.get(indexToUse1));
-//
-//		task2.setStatus(TaskStatus.NEW);
-//		task2.setClientSocket(AndroidIPs.get(NodeIps.get(indexToUse1)));
-//		task2.setTaskInputPath(FileConstant.MAP_INPUT_FILE_DIR
-//				+ FileConstant.MAP_INPUT_FILE_NAME);
+	
 		tasks.add(task1);
-	//	tasks.add(task2);
+	
 	}
-
+// implementation of task
 	public void taskimpl(Socket AndroidClient) {
 		for (JobType task : tasks) {
 			
@@ -60,7 +51,7 @@ public class ServerJobs {
 			}
 		}
 	}
-
+//send text file and xml file
 	private void task_map(JobType task) {
 		try {
 			Information msg = new Information();
@@ -68,13 +59,13 @@ public class ServerJobs {
 			Socket AndroidClient = task.getAndroidIP();
 			System.out.println("client socket ::"+AndroidClient);
 			File mapin = new File(getPath(task));
-			System.out.println("taskpath is ::"+mapin);
+			System.out.println("path to the file::"+mapin);
 			byte[] bytesbuffer = new byte[(int) mapin.length()];
 			FileInputStream fis = new FileInputStream(mapin);
 			BufferedInputStream bis = new BufferedInputStream(fis);
 			bis.read(bytesbuffer, 0, bytesbuffer.length);
 			msg.setContent(bytesbuffer);
-			System.out.println("file contents ::"+bytesbuffer);
+			System.out.println("contents of the file are::"+bytesbuffer);
 
 			ObjectOutputStream oos = new ObjectOutputStream(
 					AndroidClient.getOutputStream());
@@ -100,15 +91,14 @@ public class ServerJobs {
 		}
 
 	}
-
+//accept the result file from the device
 	private void Result_map(JobType task, Socket AndroidClient) {
 		System.out.println("waiting for output file from android device ... ");
 		System.out.println(AndroidClient);
-		String resdir = "/Users/Apple/Downloads/makhojaye-hadoop-mapreduce-cloud-framework-for-android-mobile-devices-254a9fdb84dd 2/Server/src/com/fastnu/thesis/mapreduce/result/";
+		String resdir = "/Users/Apple/Desktop/finalcode/LaptopServer/src/com/shruti/capstone/mapreduce/res/";
 		File f = new File(resdir);
 		f.mkdirs();
-//		File resFile = new File(f, "result"+j+".txt");
-//		j++;
+
 		File resFile = new File(f, "result.txt");
 		FileOutputStream fos;
 		try {
